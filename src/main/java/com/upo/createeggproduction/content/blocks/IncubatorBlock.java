@@ -54,9 +54,9 @@ public class IncubatorBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
     @Override
-    @SuppressWarnings("deprecation") // 兼容旧版
+    @SuppressWarnings("deprecation")
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return Shapes.block(); // 返回 1x1x1 的完整碰撞箱
+        return Shapes.block(); 
     }
 
     @Override
@@ -78,7 +78,7 @@ public class IncubatorBlock extends BaseEntityBlock {
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING); // 添加水平朝向属性
+        builder.add(FACING);
     }
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
