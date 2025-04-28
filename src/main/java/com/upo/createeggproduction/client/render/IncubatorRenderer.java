@@ -77,7 +77,7 @@ public class IncubatorRenderer implements BlockEntityRenderer<IncubatorBlockEnti
             poseStack.translate(localX, localY, localZ);
             float scale = 0.2f;
             poseStack.scale(scale, scale, scale);
-             poseStack.mulPose(Axis.YP.rotationDegrees(22.5f * (col % 2))); // 示例：交错旋转
+             poseStack.mulPose(Axis.YP.rotationDegrees(22.5f * (col % 2))); 
             try {
                 BakedModel itemBakedModel = this.itemRenderer.getModel(itemStack, level, null, (int) blockEntity.getBlockPos().asLong() + i);
                 RenderType itemRenderType = ItemBlockRenderTypes.getRenderType(itemStack, true);
