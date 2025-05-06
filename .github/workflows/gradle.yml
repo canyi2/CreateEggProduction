@@ -16,7 +16,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -37,22 +36,23 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build MOD
+    - name: Build MOD with Gradle
       run: ./gradlew build
 
-    - name: Find MOD JAR
-      id: modjar
+    - name: Locate built JAR
+      id: locate
       run: |
-        MOD_JAR=$(find build/libs -name "*.jar" | head -n 1)
-        echo "MOD_JAR=$MOD_JAR" >> $GITHUB_ENV
+        FILE=$(find build/libs -name "*.jar" | head -n 1)
+        echo "mod_jar=$FILE" >> $GITHUB_OUTPUT
 
-    - name: Rename and copy MOD jar
+    - name: Rename and move to output folder
       run: |
-        mkdir -p packaged-mod
-        cp $MOD_JAR packaged-mod/MyMod.jar
+        mkdir -p mod-package
+        cp ${{ steps.locate.outputs.mod_jar }} mod-package/MyMod.jar
 
-    - name: Upload MOD Artifact
-      uses: actions/upload-artifact@v3
+    - name: Upload MOD JAR
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: MyMod-Package
-        path: packaged-mod/MyMod.jar
+        path: mod-package/MyMod.jar
+
